@@ -7,7 +7,9 @@
          can find it in the source at postgres_local-ds.xml -->
       <jta-data-source>java:jboss/datasources/fidelizacion</jta-data-source>
       <class>com.github.arquiweb.fidelizacion.model.Cliente</class>
-
+      <class>com.github.arquiweb.fidelizacion.model.Regla</class>
+      <class>com.github.arquiweb.fidelizacion.model.ConceptoCanje</class>
+      <class>com.github.arquiweb.fidelizacion.model.VencimientoPuntos</class>
 
 
       <properties>

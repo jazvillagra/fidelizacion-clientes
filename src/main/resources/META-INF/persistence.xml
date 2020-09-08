@@ -6,7 +6,7 @@
       <!-- The datasource is deployed as ${ds-deployment-location}, you
          can find it in the source at postgres_local-ds.xml -->
       <jta-data-source>java:jboss/datasources/fidelizacion</jta-data-source>
-      <!-- <class>py.com.progweb.prueba.model.Persona</class> -->
+      <class>com.github.arquiweb.fidelizacion.model.Cliente</class>
 
 
 

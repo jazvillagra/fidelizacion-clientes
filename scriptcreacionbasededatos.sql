@@ -53,10 +53,14 @@ CREATE TABLE public.bolsa_puntos
     saldo integer not null,
     monto integer not null,
     CONSTRAINT bolsa_puntos_pkey PRIMARY KEY (id),
-    CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente)
-        REFERENCES cliente(id)
 );
+alter table bolsa_puntos
+	add constraint fk_id_cliente
+		foreign key (id_cliente) references cliente
+			on delete cascade;
 CREATE SEQUENCE public.bolsa_puntos_sec;
+
+
 
 CREATE TABLE public.canje_puntos
 (
@@ -65,9 +69,12 @@ CREATE TABLE public.canje_puntos
     fecha_uso date NOT NULL,
     puntaje_utilizado integer not null,
     CONSTRAINT canje_puntos_pkey PRIMARY KEY (id),
-    CONSTRAINT fk_id_cliente FOREIGN KEY(id_cliente)
-        REFERENCES cliente(id)
 );
+alter table canje_puntos
+	add constraint fk_id_cliente
+		foreign key (id_cliente) references cliente
+			on delete cascade;
+
 CREATE SEQUENCE public.canje_puntos_sec;
 
 CREATE TABLE public.det_canje_puntos
@@ -77,9 +84,14 @@ CREATE TABLE public.det_canje_puntos
     id_bolsa_puntos integer NOT NULL,
     puntaje_utilizado integer not null,
     CONSTRAINT det_canje_puntos_pkey PRIMARY KEY (id),
-    CONSTRAINT fk_id_canje FOREIGN KEY(id_canje)
-        REFERENCES canje_puntos(id),
-    CONSTRAINT fk_id_bolsa_puntos FOREIGN KEY(id_bolsa_puntos)
-        REFERENCES bolsa_puntos(id)
 );
+alter table det_canje_puntos
+	add constraint fk_id_canje
+		foreign key (id_canje) references canje_puntos
+			on delete cascade;
+alter table det_canje_puntos
+	add constraint fk_id_bolsa_puntos
+		foreign key (id_bolsa_puntos) references bolsa_puntos
+			on delete cascade;
+
 CREATE SEQUENCE public.det_canje_puntos_sec;

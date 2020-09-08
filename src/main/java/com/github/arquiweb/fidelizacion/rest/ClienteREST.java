@@ -5,6 +5,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,8 +30,8 @@ public class ClienteREST {
 
     @POST
     @Path("/")
-    public Response crear(Cliente p) {
-        this.clienteDAO.agregar(p);
+    public Response crear(Cliente cliente) {
+        this.clienteDAO.agregar(cliente);
         return Response.ok().build();
     }
     
@@ -44,4 +45,12 @@ public class ClienteREST {
     		return Response.serverError().build();
 		}
     }
+    
+    @PUT
+    @Path("/{id}")
+    public Response actualizar(@PathParam(value = "id") Integer id, Cliente cliente) {
+    	cliente.setId(id);
+        this.clienteDAO.actualizar(cliente);
+        return Response.ok().build();
+    }   
 }

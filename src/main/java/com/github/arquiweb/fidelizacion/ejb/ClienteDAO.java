@@ -38,4 +38,8 @@ public class ClienteDAO {
 			throw e;
 		}
 	}
+	
+    public void actualizar(Cliente entidad) {
+        this.em.merge(entidad);
+    }
 }

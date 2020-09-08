@@ -16,29 +16,29 @@ public class Cliente {
     @SequenceGenerator(name = "clienteSec", sequenceName = "cliente_sec", allocationSize = 0)
     private int id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", length = 50)
     @Basic(optional = false)
     private String nombre;
 
-    @Column(name = "apellido")
+    @Column(name = "apellido", length = 50)
     @Basic(optional = false)
     private String apellido;
 
-    @Column(name = "nro_documento")
+    @Column(name = "nro_documento", length = 50)
     @Basic(optional = false)
     private String nroDocumento;
 
-    @Column(name = "tipo_documento")
+    @Column(name = "tipo_documento", length = 50)
     @Basic(optional = false)
     private String tipoDocumento;
 
-    @Column(name = "nacionalidad")
+    @Column(name = "nacionalidad", length = 50)
     private String nacionalidad;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "telefono")
+    @Column(name = "telefono", length = 50)
     private String telefono;
 
     @Column(name = "fecha_nacimiento")

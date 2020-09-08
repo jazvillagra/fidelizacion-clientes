@@ -26,7 +26,7 @@ CREATE TABLE public.regla
 (
     id integer NOT NULL,
     limite_max integer NOT NULL,
-    limito_min integer NOT NULL,
+    limite_min integer NOT NULL,
     monto_equivalencia integer NOT NULL,
     CONSTRAINT regla_pkey PRIMARY KEY (id)
 );

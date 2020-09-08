@@ -10,7 +10,9 @@
       <class>com.github.arquiweb.fidelizacion.model.Regla</class>
       <class>com.github.arquiweb.fidelizacion.model.ConceptoCanje</class>
       <class>com.github.arquiweb.fidelizacion.model.VencimientoPuntos</class>
-
+      <class>com.github.arquiweb.fidelizacion.model.BolsaPuntos</class>
+      <class>com.github.arquiweb.fidelizacion.model.CanjePuntos</class>
+      <class>com.github.arquiweb.fidelizacion.model.DetCanjePuntos</class>
 
       <properties>
          <property name="hibernate.id.new_generator_mappings" value="true"/>

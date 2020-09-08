@@ -12,13 +12,12 @@ public class DetCanjePuntos {
     @SequenceGenerator(name = "detCanjePuntosSec", sequenceName = "det_canje_puntos_sec", allocationSize = 0)
     private int id;
 
-    @JoinColumn(name = "id_canje", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private CanjePuntos idCanje;
+    @Column(name = "id_canje")
+    private int idCanje;
 
-    @JoinColumn(name = "id_bolsa_puntos", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private BolsaPuntos idBolsaPuntos;
+    @Column(name = "id_bolsa_puntos")
+    @Basic(optional = false)
+    private int idBolsaPuntos;
 
     @Column(name = "puntaje_utilizado")
     @Basic(optional = false)
@@ -32,19 +31,19 @@ public class DetCanjePuntos {
         this.id = id;
     }
 
-    public CanjePuntos getIdCanje() {
+    public int getIdCanje() {
         return idCanje;
     }
 
-    public void setIdCanje(CanjePuntos idCanje) {
+    public void setIdCanje(int idCanje) {
         this.idCanje = idCanje;
     }
 
-    public BolsaPuntos getIdBolsaPuntos() {
+    public int getIdBolsaPuntos() {
         return idBolsaPuntos;
     }
 
-    public void setIdBolsaPuntos(BolsaPuntos idBolsaPuntos) {
+    public void setIdBolsaPuntos(int idBolsaPuntos) {
         this.idBolsaPuntos = idBolsaPuntos;
     }
 

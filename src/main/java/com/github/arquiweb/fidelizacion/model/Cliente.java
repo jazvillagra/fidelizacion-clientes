@@ -44,12 +44,6 @@ public class Cliente {
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
 
-    @OneToOne(mappedBy = "bolsa_puntos")
-    private BolsaPuntos bolsaPuntos;
-
-    @OneToOne(mappedBy = "canje_puntos")
-    private CanjePuntos canjePuntos;
-
     public int getId() {
         return id;
     }
@@ -120,21 +114,5 @@ public class Cliente {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public BolsaPuntos getBolsaPuntos() {
-        return bolsaPuntos;
-    }
-
-    public void setBolsaPuntos(BolsaPuntos bolsaPuntos) {
-        this.bolsaPuntos = bolsaPuntos;
-    }
-
-    public CanjePuntos getCanjePuntos() {
-        return canjePuntos;
-    }
-
-    public void setCanjePuntos(CanjePuntos canjePuntos) {
-        this.canjePuntos = canjePuntos;
     }
 }

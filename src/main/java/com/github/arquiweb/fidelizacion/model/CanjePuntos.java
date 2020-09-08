@@ -13,9 +13,9 @@ public class CanjePuntos {
     @SequenceGenerator(name = "canjePuntosSec", sequenceName = "canje_puntos_sec", allocationSize = 0)
     private int id;
 
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Cliente idCliente;
+    @Column(name = "id_cliente")
+    @Basic(optional = false)
+    private int idCliente;
 
     @Column(name = "fecha_uso")
     @Basic(optional = false)
@@ -23,10 +23,6 @@ public class CanjePuntos {
 
     @Column(name = "puntaje_utilizado")
     @Basic(optional = false)
-
-    @OneToOne(mappedBy = "det_canje_puntos")
-    private DetCanjePuntos detCanjePuntos;
-
     private int puntajeUtilizado;
 
     public int getId() {
@@ -37,11 +33,11 @@ public class CanjePuntos {
         this.id = id;
     }
 
-    public Cliente getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -59,13 +55,5 @@ public class CanjePuntos {
 
     public void setPuntajeUtilizado(int puntajeUtilizado) {
         this.puntajeUtilizado = puntajeUtilizado;
-    }
-
-    public DetCanjePuntos getDetCanjePuntos() {
-        return detCanjePuntos;
-    }
-
-    public void setDetCanjePuntos(DetCanjePuntos detCanjePuntos) {
-        this.detCanjePuntos = detCanjePuntos;
     }
 }

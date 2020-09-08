@@ -13,9 +13,9 @@ public class BolsaPuntos {
     @SequenceGenerator(name = "bolsaPuntosSec", sequenceName = "bolsa_puntos_sec", allocationSize = 0)
     private int id;
 
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Cliente idCliente;
+    @Column(name = "id_cliente")
+    @Basic(optional = false)
+    private int idCliente;
 
     @Column(name = "fecha_asignacion")
     @Basic(optional = false)
@@ -41,9 +41,6 @@ public class BolsaPuntos {
     @Basic(optional = false)
     private int monto;
 
-    @OneToOne(mappedBy = "det_canje_puntos")
-    private DetCanjePuntos detCanjePuntos;
-
     public int getId() {
         return id;
     }
@@ -52,11 +49,11 @@ public class BolsaPuntos {
         this.id = id;
     }
 
-    public Cliente getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Cliente idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -106,13 +103,5 @@ public class BolsaPuntos {
 
     public void setMonto(int monto) {
         this.monto = monto;
-    }
-
-    public DetCanjePuntos getDetCanjePuntos() {
-        return detCanjePuntos;
-    }
-
-    public void setDetCanjePuntos(DetCanjePuntos detCanjePuntos) {
-        this.detCanjePuntos = detCanjePuntos;
     }
 }

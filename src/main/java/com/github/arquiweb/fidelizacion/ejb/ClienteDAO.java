@@ -25,4 +25,17 @@ public class ClienteDAO {
         List<Cliente> clientes = (List<Cliente>) q.getResultList();
         return clientes;
     }
+
+    public Cliente obtenerCliente(Integer id) {
+    	return this.em.find(Cliente.class, id);
+    }
+    
+	public void eliminar(Integer id) {
+		try {
+			Cliente entity = obtenerCliente(id);
+			this.em.remove(entity);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

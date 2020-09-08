@@ -8,7 +8,7 @@ CREATE TABLE public.cliente
     nacionalidad character varying(50) NOT NULL,
     email character varying(50),
     telefono character varying(50),
-    fecha_nacionalidad character varying(50) NOT NULL,
+    fecha_nacimiento date NOT NULL,
     CONSTRAINT cliente_pkey PRIMARY KEY (id)
 );
 CREATE SEQUENCE public.cliente_sec;

@@ -23,6 +23,10 @@ public class CanjePuntos {
 
     @Column(name = "puntaje_utilizado")
     @Basic(optional = false)
+
+    @OneToOne(mappedBy = "det_canje_puntos")
+    private DetCanjePuntos detCanjePuntos;
+
     private int puntajeUtilizado;
 
     public int getId() {
@@ -55,5 +59,13 @@ public class CanjePuntos {
 
     public void setPuntajeUtilizado(int puntajeUtilizado) {
         this.puntajeUtilizado = puntajeUtilizado;
+    }
+
+    public DetCanjePuntos getDetCanjePuntos() {
+        return detCanjePuntos;
+    }
+
+    public void setDetCanjePuntos(DetCanjePuntos detCanjePuntos) {
+        this.detCanjePuntos = detCanjePuntos;
     }
 }

@@ -41,6 +41,9 @@ public class BolsaPuntos {
     @Basic(optional = false)
     private int monto;
 
+    @OneToOne(mappedBy = "det_canje_puntos")
+    private DetCanjePuntos detCanjePuntos;
+
     public int getId() {
         return id;
     }
@@ -103,5 +106,13 @@ public class BolsaPuntos {
 
     public void setMonto(int monto) {
         this.monto = monto;
+    }
+
+    public DetCanjePuntos getDetCanjePuntos() {
+        return detCanjePuntos;
+    }
+
+    public void setDetCanjePuntos(DetCanjePuntos detCanjePuntos) {
+        this.detCanjePuntos = detCanjePuntos;
     }
 }

@@ -47,6 +47,9 @@ public class Cliente {
     @OneToOne(mappedBy = "bolsa_puntos")
     private BolsaPuntos bolsaPuntos;
 
+    @OneToOne(mappedBy = "canje_puntos")
+    private CanjePuntos canjePuntos;
+
     public int getId() {
         return id;
     }
@@ -125,5 +128,13 @@ public class Cliente {
 
     public void setBolsaPuntos(BolsaPuntos bolsaPuntos) {
         this.bolsaPuntos = bolsaPuntos;
+    }
+
+    public CanjePuntos getCanjePuntos() {
+        return canjePuntos;
+    }
+
+    public void setCanjePuntos(CanjePuntos canjePuntos) {
+        this.canjePuntos = canjePuntos;
     }
 }

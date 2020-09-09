@@ -1,7 +1,6 @@
 package com.github.arquiweb.fidelizacion.rest;
 
 import com.github.arquiweb.fidelizacion.ejb.VencimientoPuntosDAO;
-import com.github.arquiweb.fidelizacion.model.Cliente;
 import com.github.arquiweb.fidelizacion.model.VencimientoPuntos;
 
 import javax.inject.Inject;

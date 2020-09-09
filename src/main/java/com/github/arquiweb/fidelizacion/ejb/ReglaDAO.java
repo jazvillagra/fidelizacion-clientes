@@ -41,4 +41,18 @@ public class ReglaDAO {
     public void actualizar(Regla entidad) {
         this.em.merge(entidad);
     }
+    
+    public Integer obtenerEquivalenciaPuntos(Integer montoTotal) throws Exception {
+    	Query q = this.em.createQuery("select p from Regla p");
+    	List<Regla> reglas = (List<Regla>) q.getResultList();
+		for(Regla regla : reglas) {
+	    	if(regla.getLimiteMax() == null && regla.getLimiteMin() == null) {
+	    		return montoTotal/regla.getMontoEquivalencia();
+	    	}
+	    	else if(montoTotal <= regla.getLimiteMax() && montoTotal >= regla.getLimiteMin()) {
+				return montoTotal/regla.getMontoEquivalencia();
+			}
+		}
+		throw new Exception("Regla inexistente");
+    }
 }

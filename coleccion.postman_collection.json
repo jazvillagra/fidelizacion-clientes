@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "36ccd28a-59d2-4fa0-b291-87523e1aed1b",
+		"_postman_id": "08fe0a98-b123-4562-8ffe-2de7ef4291a8",
 		"name": "Electiva3-Parcial1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -67,7 +67,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "22de5cb0-e5e3-445c-b3f6-fa0da4ed4af8",
+								"id": "fd793ad3-eeb5-48f9-a699-91b06a890f47",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -183,7 +183,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "ed4a4526-26aa-4d00-b55d-6e4b6b90a52f",
+								"id": "d95db3ea-6f63-4da8-845a-67c6568aad2b",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -297,7 +297,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "cef10dc6-1fc5-41e7-ba08-a21da3e1f21b",
+								"id": "192e99a1-4e9d-49d0-b80a-6b172c4317d2",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -359,9 +359,177 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getAmountPerPoints",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9a7a83f1-c097-4ace-92be-990e45e6ef18",
+								"exec": [
+									"const dateNow = new Date();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/regla/250000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"regla",
+								"250000"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ConceptoCanje",
+			"item": [
+				{
+					"name": "getAllConceptoCanje",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": null,\n\t\"descConcepto\": \"vale de premio\",\n\t\"puntosRequeridos\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fidelizacion/concepto-canje",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"concepto-canje"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveConceptoCanje",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descConcepto\": \"valeee de premio\",\n\t\"puntosRequeridos\": 150\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fidelizacion/concepto-canje",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"concepto-canje"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putConceptoCanje",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descConcepto\": \"premios\",\n\t\"puntosRequeridos\": 1500\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fidelizacion/concepto-canje/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"concepto-canje",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteConceptoCanje",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/concepto-canje/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"concepto-canje",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b2c334b5-8aeb-4196-8ba5-28cd5989af4b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "71b31e4c-52c8-4be4-8071-5c9e20a99447",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

@@ -15,11 +15,11 @@ public class ConceptoCanje {
 
     @Column(name = "desc_concepto")
     @Basic(optional = false)
-    private int descConcepto;
+    private String descConcepto;
 
     @Column(name = "puntos_requeridos", length = 200)
     @Basic(optional = false)
-    private String puntosRequeridos;
+    private int puntosRequeridos;
 
     public int getId() {
         return id;
@@ -29,19 +29,20 @@ public class ConceptoCanje {
         this.id = id;
     }
 
-    public int getDescConcepto() {
+    public String getDescConcepto() {
         return descConcepto;
     }
 
-    public void setDescConcepto(int descConcepto) {
+    public void setDescConcepto(String descConcepto) {
         this.descConcepto = descConcepto;
     }
 
-    public String getPuntosRequeridos() {
+    public int getPuntosRequeridos() {
         return puntosRequeridos;
     }
 
-    public void setPuntosRequeridos(String puntosRequeridos) {
+    public void setPuntosRequeridos(int puntosRequeridos) {
         this.puntosRequeridos = puntosRequeridos;
     }
+
 }

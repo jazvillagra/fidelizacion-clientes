@@ -25,6 +25,10 @@ public class CanjePuntos {
     @Basic(optional = false)
     private int puntajeUtilizado;
 
+    @Column(name = "id_concepto")
+    @Basic(optional = false)
+    private int idConcepto;
+
     public int getId() {
         return id;
     }

@@ -16,8 +16,8 @@ CREATE SEQUENCE public.cliente_sec;
 CREATE TABLE public.concepto_canje
 (
     id integer NOT NULL,
-    desc_concepto integer NOT NULL,
-    puntos_requeridos character varying(200) NOT NULL,
+    desc_concepto character varying(200) NOT NULL,
+    puntos_requeridos  integer NOT NULL,
     CONSTRAINT concepto_canje_pkey PRIMARY KEY (id)
 );
 CREATE SEQUENCE public.concepto_canje_sec;

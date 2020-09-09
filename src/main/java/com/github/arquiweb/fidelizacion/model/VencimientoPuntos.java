@@ -22,7 +22,7 @@ public class VencimientoPuntos {
     private Date fechaFinValidez;
 
     @Column(name = "duracion")
-    private Date duracion;
+    private int duracion;
 
     public int getId() {
         return id;
@@ -48,11 +48,11 @@ public class VencimientoPuntos {
         this.fechaFinValidez = fechaFinValidez;
     }
 
-    public Date getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(Date duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 }

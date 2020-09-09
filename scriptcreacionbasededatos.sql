@@ -68,11 +68,16 @@ CREATE TABLE public.canje_puntos
     id_cliente integer NOT NULL,
     fecha_uso date NOT NULL,
     puntaje_utilizado integer not null,
+    id_concepto integer,
     CONSTRAINT canje_puntos_pkey PRIMARY KEY (id),
 );
 alter table canje_puntos
 	add constraint fk_id_cliente
 		foreign key (id_cliente) references cliente
+			on delete cascade;
+alter table canje_puntos
+	add constraint fk_id_conepto
+		foreign key (id_concepto) references concepto_canje
 			on delete cascade;
 
 CREATE SEQUENCE public.canje_puntos_sec;

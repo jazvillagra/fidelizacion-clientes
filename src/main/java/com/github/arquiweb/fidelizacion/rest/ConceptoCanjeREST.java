@@ -16,11 +16,11 @@ public class ConceptoCanjeREST {
     @Inject
     private ConceptoCanjeDAO conceptoCanjeDao;
 
-    /*@GET
+    @GET
     @Path("/")
-    public response lista(@QueryParam("desc_concepto") Integer descConcepto)
-
-     */
+    public Response listar() {
+        return Response.ok(conceptoCanjeDao.obtenerClientesPorParametro()).build();
+    }
 
     @POST
     @Path("/")

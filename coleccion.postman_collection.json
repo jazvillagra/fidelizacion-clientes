@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "08fe0a98-b123-4562-8ffe-2de7ef4291a8",
+		"_postman_id": "02375d96-2454-4ef6-ac74-3a3f6c22d935",
 		"name": "Electiva3-Parcial1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -67,7 +67,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "fd793ad3-eeb5-48f9-a699-91b06a890f47",
+								"id": "1803242d-43a6-4f61-80bb-0dc1b1a689f6",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -183,7 +183,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d95db3ea-6f63-4da8-845a-67c6568aad2b",
+								"id": "ee2105b4-4e99-4123-a92e-4c5dcbcb2fd6",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -297,7 +297,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "192e99a1-4e9d-49d0-b80a-6b172c4317d2",
+								"id": "7f3a169e-83b5-4b98-ac14-2530c61ab5f6",
 								"exec": [
 									"const dateNow = new Date();"
 								],

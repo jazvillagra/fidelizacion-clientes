@@ -52,7 +52,7 @@ CREATE TABLE public.bolsa_puntos
     puntaje_utilizado integer not null,
     saldo integer not null,
     monto integer not null,
-    CONSTRAINT bolsa_puntos_pkey PRIMARY KEY (id),
+    CONSTRAINT bolsa_puntos_pkey PRIMARY KEY (id)
 );
 alter table bolsa_puntos
 	add constraint fk_id_cliente
@@ -69,7 +69,7 @@ CREATE TABLE public.canje_puntos
     fecha_uso date NOT NULL,
     puntaje_utilizado integer not null,
     id_concepto integer,
-    CONSTRAINT canje_puntos_pkey PRIMARY KEY (id),
+    CONSTRAINT canje_puntos_pkey PRIMARY KEY (id)
 );
 alter table canje_puntos
 	add constraint fk_id_cliente
@@ -88,7 +88,7 @@ CREATE TABLE public.det_canje_puntos
     id_canje integer NOT NULL,
     id_bolsa_puntos integer NOT NULL,
     puntaje_utilizado integer not null,
-    CONSTRAINT det_canje_puntos_pkey PRIMARY KEY (id),
+    CONSTRAINT det_canje_puntos_pkey PRIMARY KEY (id)
 );
 alter table det_canje_puntos
 	add constraint fk_id_canje

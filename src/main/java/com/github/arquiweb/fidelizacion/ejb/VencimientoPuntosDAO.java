@@ -29,4 +29,7 @@ public class VencimientoPuntosDAO {
             throw e;
         }
     }
+    public void actualizar(VencimientoPuntos entidad) {
+        this.em.merge(entidad);
+    }
 }

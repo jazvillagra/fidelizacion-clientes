@@ -29,6 +29,14 @@ public class CanjePuntos {
     @Basic(optional = false)
     private int idConcepto;
 
+    public int getIdConcepto() {
+        return idConcepto;
+    }
+
+    public void setIdConcepto(int idConcepto) {
+        this.idConcepto = idConcepto;
+    }
+
     public int getId() {
         return id;
     }

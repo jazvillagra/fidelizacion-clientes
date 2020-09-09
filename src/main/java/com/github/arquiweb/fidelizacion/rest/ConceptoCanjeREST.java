@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("conceptoCanje")
+@Path("concepto-canje")
 @Consumes("application/json")
 @Produces("application/json")
 public class ConceptoCanjeREST {

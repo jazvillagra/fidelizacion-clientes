@@ -132,6 +132,122 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Vencimiento Puntos",
+			"item": [
+				{
+					"name": "getVencimientoPuntos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/vencimiento-puntos/listar/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"vencimiento-puntos",
+								"listar",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRegla",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/vencimiento-puntos/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"vencimiento-puntos",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveVencimientoPuntos",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ed4a4526-26aa-4d00-b55d-6e4b6b90a52f",
+								"exec": [
+									"const dateNow = new Date();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaIniValidez\": \"2018-09-28T15:33:32\",\r\n    \"fechaFinValidez\": \"2018-10-28T15:33:32\",\r\n    \"duracion\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fidelizacion/vencimiento-puntos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"vencimiento-puntos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "putRegla",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fechaIniValidez\": \"2018-09-28T15:33:32\",\r\n    \"fechaFinValidez\": \"2018-10-28T15:33:32\",\r\n    \"duracion\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fidelizacion/vencimiento-puntos/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"vencimiento-puntos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

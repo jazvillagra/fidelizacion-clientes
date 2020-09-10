@@ -25,8 +25,8 @@ CREATE SEQUENCE public.concepto_canje_sec;
 CREATE TABLE public.regla
 (
     id integer NOT NULL,
-    limite_max integer NOT NULL,
-    limite_min integer NOT NULL,
+    limite_max integer,
+    limite_min integer,
     monto_equivalencia integer NOT NULL,
     CONSTRAINT regla_pkey PRIMARY KEY (id)
 );

@@ -359,6 +359,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getAmountPerPoints",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9a7a83f1-c097-4ace-92be-990e45e6ef18",
+								"exec": [
+									"const dateNow = new Date();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/regla/250000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"regla",
+								"250000"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -476,6 +508,28 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b2c334b5-8aeb-4196-8ba5-28cd5989af4b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "71b31e4c-52c8-4be4-8071-5c9e20a99447",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}

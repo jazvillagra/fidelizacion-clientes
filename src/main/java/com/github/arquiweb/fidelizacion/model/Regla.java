@@ -15,15 +15,15 @@ public class Regla {
 
     @Column(name = "limite_max")
     @Basic(optional = false)
-    private int limiteMax;
+    private Integer limiteMax;
 
     @Column(name = "limite_min")
     @Basic(optional = false)
-    private int limiteMin;
+    private Integer limiteMin;
 
     @Column(name = "monto_equivalencia")
     @Basic(optional = false)
-    private int montoEquivalencia;
+    private Integer montoEquivalencia;
 
     public int getId() {
         return id;
@@ -33,19 +33,19 @@ public class Regla {
         this.id = id;
     }
 
-    public int getLimiteMax() {
+    public Integer getLimiteMax() {
         return limiteMax;
     }
 
-    public void setLimiteMax(int limiteMax) {
+    public void setLimiteMax(Integer limiteMax) {
         this.limiteMax = limiteMax;
     }
 
-    public int getLimiteMin() {
+    public Integer getLimiteMin() {
         return limiteMin;
     }
 
-    public void setLimiteMin(int limiteMin) {
+    public void setLimiteMin(Integer limiteMin) {
         this.limiteMin = limiteMin;
     }
 
@@ -53,7 +53,7 @@ public class Regla {
         return montoEquivalencia;
     }
 
-    public void setMontoEquivalencia(int montoEquivalencia) {
+    public void setMontoEquivalencia(Integer montoEquivalencia) {
         this.montoEquivalencia = montoEquivalencia;
     }
 }

@@ -47,11 +47,11 @@ CREATE TABLE public.bolsa_puntos
     id integer NOT NULL,
     id_cliente integer NOT NULL,
     fecha_asignacion date NOT NULL,
-    fecha_vencimiento date NOT NULL,
+    fecha_vencimiento date,
     puntaje_asignado integer not null,
-    puntaje_utilizado integer not null,
-    saldo integer not null,
-    monto integer not null,
+    puntaje_utilizado integer,
+    saldo integer,
+    monto integer,
     CONSTRAINT bolsa_puntos_pkey PRIMARY KEY (id)
 );
 alter table bolsa_puntos

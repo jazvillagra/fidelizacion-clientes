@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.List;
 
 @Stateless
 public class BolsaPuntosDAO {
@@ -22,10 +23,15 @@ public class BolsaPuntosDAO {
         return this.em.find(BolsaPuntos.class, id);
     }
 
-    public BolsaPuntos obtenerPorIdCliente(Integer idCliente){
-        Query q = this.em.createQuery("select b from BolsaPuntos b where b.idCliente = :param");
-        q.setParameter("param", "%"+idCliente+"%");
-        return (BolsaPuntos) q.getResultList();
+    public List<BolsaPuntos> obtenerPorIdCliente(Integer idCliente){
+        List<BolsaPuntos> bolsaPuntos = null;
+        Query q = null;
+        q = this.em.createQuery("select b from BolsaPuntos b where b.idCliente = :param");
+        q.setParameter("param", idCliente);
+
+        bolsaPuntos = (List<BolsaPuntos>) q.getResultList();
+
+        return bolsaPuntos;
     }
 
     public void eliminar(Integer id) {

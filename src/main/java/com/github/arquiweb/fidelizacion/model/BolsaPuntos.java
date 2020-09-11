@@ -11,11 +11,11 @@ public class BolsaPuntos {
     @Basic(optional = false)
     @GeneratedValue(generator = "bolsaPuntosSec", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "bolsaPuntosSec", sequenceName = "bolsa_puntos_sec", allocationSize = 0)
-    private int id;
+    private Integer id;
 
     @Column(name = "id_cliente")
     @Basic(optional = false)
-    private int idCliente;
+    private Integer idCliente;
 
     @Column(name = "fecha_asignacion")
     @Basic(optional = false)
@@ -27,33 +27,33 @@ public class BolsaPuntos {
 
     @Column(name = "puntaje_asignado")
     @Basic(optional = false)
-    private int puntajeAsignado;
+    private Integer puntajeAsignado;
 
     @Column(name = "puntaje_utilizado")
     @Basic(optional = false)
-    private int puntajeUtilizado;
+    private Integer puntajeUtilizado;
 
     @Column(name = "saldo")
     @Basic(optional = false)
-    private int saldo;
+    private Integer saldo;
 
     @Column(name = "monto")
     @Basic(optional = false)
-    private int monto;
+    private Integer monto;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -73,35 +73,35 @@ public class BolsaPuntos {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public int getPuntajeAsignado() {
+    public Integer getPuntajeAsignado() {
         return puntajeAsignado;
     }
 
-    public void setPuntajeAsignado(int puntajeAsignado) {
+    public void setPuntajeAsignado(Integer puntajeAsignado) {
         this.puntajeAsignado = puntajeAsignado;
     }
 
-    public int getPuntajeUtilizado() {
+    public Integer getPuntajeUtilizado() {
         return puntajeUtilizado;
     }
 
-    public void setPuntajeUtilizado(int puntajeUtilizado) {
+    public void setPuntajeUtilizado(Integer puntajeUtilizado) {
         this.puntajeUtilizado = puntajeUtilizado;
     }
 
-    public int getSaldo() {
+    public Integer getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(Integer saldo) {
         this.saldo = saldo;
     }
 
-    public int getMonto() {
+    public Integer getMonto() {
         return monto;
     }
 
-    public void setMonto(int monto) {
+    public void setMonto(Integer monto) {
         this.monto = monto;
     }
 }

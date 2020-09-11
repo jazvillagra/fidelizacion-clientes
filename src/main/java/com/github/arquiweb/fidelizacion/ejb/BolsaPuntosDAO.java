@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -35,14 +36,16 @@ public class BolsaPuntosDAO {
     }
 
     public List<BolsaPuntos> obtenerPorRangoPuntos(Integer rangoInicio, Integer rangoFin){
-        System.out.print(rangoFin);
-        System.out.print(rangoInicio);
+        Query q = this.em.createQuery("select p from BolsaPuntos p");
+        List<BolsaPuntos> bolsasPuntos = (List<BolsaPuntos>) q.getResultList();
+        List<BolsaPuntos> result = new ArrayList<>();
+        for (BolsaPuntos bolsaPuntos : bolsasPuntos) {
+            if(bolsaPuntos.getPuntajeAsignado() >= rangoInicio && bolsaPuntos.getPuntajeAsignado() <= rangoFin){
+                result.add(bolsaPuntos);
+            }
+        }
 
-        List<BolsaPuntos> bolsaPuntos = null;
-        Query q = null;
-        q = this.em.createQuery("select b from BolsaPuntos b");
-        bolsaPuntos = (List<BolsaPuntos>) q.getResultList();
-        return bolsaPuntos;
+        return result;
     }
 
     public void eliminar(Integer id) {

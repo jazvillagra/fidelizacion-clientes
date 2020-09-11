@@ -20,10 +20,10 @@ public class BolsaPuntosREST {
     @Path("/")
     public Response listar( @QueryParam("idCliente") Integer idCliente,
                             @QueryParam("rangoInicio") Integer rangoInicio,
-                            @QueryParam("rangoFin") Integer rangoFin ){
-        if (idCliente != null && !idCliente.equals("")) {
+                            @QueryParam("rangoFin") Integer rangoFin ) throws Exception {
+        if (idCliente != null) {
             return Response.ok(bolsaPuntosDAO.obtenerPorIdCliente(idCliente)).build();
-        }else if (rangoFin != null && !rangoFin.equals("") && rangoInicio != null && !rangoInicio.equals("")){
+        }else if (rangoFin != null && rangoInicio != null){
             return  Response.ok(bolsaPuntosDAO.obtenerPorRangoPuntos(rangoInicio, rangoFin)).build();
         } else {
             return  Response.ok("Envie algun parametro(idCliente,rangoInicio and rangoFin)").build();

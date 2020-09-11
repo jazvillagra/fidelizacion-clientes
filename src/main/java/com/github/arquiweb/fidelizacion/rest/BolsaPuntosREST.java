@@ -1,10 +1,12 @@
 package com.github.arquiweb.fidelizacion.rest;
 
 import com.github.arquiweb.fidelizacion.ejb.BolsaPuntosDAO;
+import com.github.arquiweb.fidelizacion.model.BolsaPuntos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("bolsa-puntos")
 @Consumes("application/json")
@@ -16,8 +18,16 @@ public class BolsaPuntosREST {
 
     @GET
     @Path("/")
-    public Response listar(@QueryParam("idCliente") Integer idCliente) {
-        return Response.ok(bolsaPuntosDAO.obtenerPorIdCliente(idCliente)).build();
+    public Response listar( @QueryParam("idCliente") Integer idCliente,
+                            @QueryParam("rangoInicio") Integer rangoInicio,
+                            @QueryParam("rangoFin") Integer rangoFin ){
+        if (idCliente != null && !idCliente.equals("")) {
+            return Response.ok(bolsaPuntosDAO.obtenerPorIdCliente(idCliente)).build();
+        }else if (rangoFin != null && !rangoFin.equals("") && rangoInicio != null && !rangoInicio.equals("")){
+            return  Response.ok(bolsaPuntosDAO.obtenerPorRangoPuntos(rangoInicio, rangoFin)).build();
+        } else {
+            return  Response.ok("Envie algun parametro(idCliente,rangoInicio and rangoFin)").build();
+        }
     }
 
 }

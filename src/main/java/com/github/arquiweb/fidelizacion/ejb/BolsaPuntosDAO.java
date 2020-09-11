@@ -34,6 +34,17 @@ public class BolsaPuntosDAO {
         return bolsaPuntos;
     }
 
+    public List<BolsaPuntos> obtenerPorRangoPuntos(Integer rangoInicio, Integer rangoFin){
+        System.out.print(rangoFin);
+        System.out.print(rangoInicio);
+
+        List<BolsaPuntos> bolsaPuntos = null;
+        Query q = null;
+        q = this.em.createQuery("select b from BolsaPuntos b");
+        bolsaPuntos = (List<BolsaPuntos>) q.getResultList();
+        return bolsaPuntos;
+    }
+
     public void eliminar(Integer id) {
         try {
             BolsaPuntos entity = obtenerPorId(id);

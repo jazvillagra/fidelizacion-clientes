@@ -2,7 +2,6 @@ package com.github.arquiweb.fidelizacion.rest;
 
 
 import com.github.arquiweb.fidelizacion.ejb.CanjePuntosDAO;
-import com.github.arquiweb.fidelizacion.model.CanjePuntos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,7 +23,8 @@ public class CanjePuntosREST {
 
     @POST
     @Path("/canjear")
-    public Response canjearPuntos(Integer idCliente, Integer idConceptoCanje) throws Exception {
+    public Response canjearPuntos(@QueryParam("idCliente") Integer idCliente,
+                                  @QueryParam("idConceptoCanje") Integer idConceptoCanje) throws Exception {
         this.canjePuntosDAO.agregarCanjePuntos(idCliente, idConceptoCanje);
         return Response.ok().build();
     }

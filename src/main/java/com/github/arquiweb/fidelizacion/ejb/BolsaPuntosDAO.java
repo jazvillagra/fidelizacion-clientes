@@ -22,6 +22,12 @@ public class BolsaPuntosDAO {
     @Inject
     private VencimientoPuntosDAO vencimientoPuntosDAO;
 
+    public List<BolsaPuntos> listar(){
+        Query q = this.em.createQuery("select p from BolsaPuntos p");
+        List<BolsaPuntos> bolsaPuntos = (List<BolsaPuntos>) q.getResultList();    	
+        return bolsaPuntos;
+    }
+    
     public void calcBolsaPuntos(Integer idCliente, Integer monto) throws Exception {
     	try {
 			Integer puntos = reglaDAO.obtenerEquivalenciaPuntos(monto);

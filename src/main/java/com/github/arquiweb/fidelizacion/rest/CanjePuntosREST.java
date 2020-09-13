@@ -17,6 +17,12 @@ public class CanjePuntosREST {
 
     @GET
     @Path("/")
+    public Response listarCanjes(){
+        return Response.ok(canjePuntosDAO.obtenerCanjePuntos()).build();
+    }
+
+    @GET
+    @Path("/listar/cliente")
     public Response listarPorIdCliente(@QueryParam("idCliente") Integer idCliente){
         return Response.ok(canjePuntosDAO.obtenerCanjePuntosPorId(idCliente)).build();
     }

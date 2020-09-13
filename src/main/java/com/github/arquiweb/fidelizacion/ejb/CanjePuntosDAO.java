@@ -33,6 +33,12 @@ public class CanjePuntosDAO {
 
     private final EmailUtils mailSender = new EmailUtils();
 
+    public List<CanjePuntos> obtenerCanjePuntos(){
+
+        Query q = this.em.createQuery("select c from CanjePuntos c");
+
+        return (List<CanjePuntos>)q.getResultList();
+    }
     public Object obtenerCanjePuntosPorId(Integer id){
         return this.em.find(CanjePuntos.class, id);
     }

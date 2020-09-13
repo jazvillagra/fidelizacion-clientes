@@ -29,6 +29,7 @@ public class BolsaPuntosDAO {
 			bolsa.setIdCliente(idCliente);
 			bolsa.setMonto(monto);
 			bolsa.setPuntajeAsignado(puntos);
+			bolsa.setSaldo(puntos);
 			bolsa.setFechaAsignacion(new Date());
 			bolsa.setFechaVencimiento(vencimientoPuntosDAO.calculaFechaVencimiento(new Date()));
 			agregar(bolsa);

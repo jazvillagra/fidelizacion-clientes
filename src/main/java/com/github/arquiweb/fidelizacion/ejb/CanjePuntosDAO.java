@@ -1,10 +1,7 @@
 package com.github.arquiweb.fidelizacion.ejb;
 
 import com.github.arquiweb.fidelizacion.mail.SimpleEmail;
-import com.github.arquiweb.fidelizacion.model.BolsaPuntos;
-import com.github.arquiweb.fidelizacion.model.CanjePuntos;
-import com.github.arquiweb.fidelizacion.model.ConceptoCanje;
-import com.github.arquiweb.fidelizacion.model.DetCanjePuntos;
+import com.github.arquiweb.fidelizacion.model.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -34,25 +31,66 @@ public class CanjePuntosDAO {
     @Inject
     private ConceptoCanjeDAO conceptoCanjeDAO;
 
-    private SimpleEmail mailSender;
+    private final SimpleEmail mailSender = new SimpleEmail();
 
     public Object obtenerCanjePuntosPorId(Integer id){
         return this.em.find(CanjePuntos.class, id);
     }
     /*
-     * Para hacer el canje de puntos de un cliente, se deben sustraer los puntos de las bolsas del cliente cuya
-     * fecha de caducidad no haya pasado y cuyo saldo de puntos sea mayor a cero.
+     * Para hacer el canje de puntos de un cliente, se deben sustraer los puntos de las bolsas del cliente
+     * cuya fecha de caducidad no haya pasado y cuyo saldo de puntos sea mayor a cero.
      * Se deben restar primero los puntos de las bolsas más viejas (FIFO)
      * Se envia un email de confirmacion al cliente cuando se persisten los datos
      */
-    public void agregarCanjePuntos(CanjePuntos canje){
+    public void agregarCanjePuntos(Integer idCliente, Integer idConceptoCanje) throws Exception {
 
-        List<BolsaPuntos> bolsasCliente = bolsaPuntosDAO
-                .obtenerPorIdClienteConFechasAscendentes(canje.getIdCliente());
+        Cliente cliente = clienteDAO.obtenerCliente(idCliente);
+        ConceptoCanje conceptoCanje = conceptoCanjeDAO.obtenerConceptoCanje(idConceptoCanje);
+
+        List<BolsaPuntos> bolsasCliente = bolsaPuntosDAO.obtenerPorIdClienteConFechasAscendentes(idCliente);
         List<DetCanjePuntos> detalles = new ArrayList<>();
-        int puntajeAUtilizar = canje.getPuntajeUtilizado();
+        int puntajeAUtilizar = conceptoCanje.getPuntosRequeridos();
 
-        for (BolsaPuntos bolsa: bolsasCliente) {
+        if (Boolean.TRUE.equals(clienteHabilitadoParaCanje(bolsasCliente, puntajeAUtilizar))){
+            CanjePuntos canje = new CanjePuntos();
+            canje.setIdCliente(idCliente);
+            canje.setIdConcepto(idConceptoCanje);
+
+            canjearPuntosDeBolsas(bolsasCliente, puntajeAUtilizar, detalles);
+
+            canje.setPuntajeUtilizado(conceptoCanje.getPuntosRequeridos());
+            canje.setFechaUso(new Date());
+            this.em.persist(canje);
+            this.em.flush();
+            detCanjePuntosDAO.guardarDetalles(canje.getId(), detalles);
+
+            try {
+                mailSender.sendEmailConfirmacionCanje(cliente, canje.getPuntajeUtilizado(),
+                        conceptoCanje.getDescConcepto(), canje.getFechaUso());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }else{
+            throw new Exception("No tiene suficientes puntos para realizar el canje");
+        }
+    }
+
+    private Boolean clienteHabilitadoParaCanje(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar) {
+        int totalPuntos = 0;
+        for (BolsaPuntos bolsa : bolsasCliente) {
+            if(bolsa.getFechaVencimiento().after(new Date())) {
+                totalPuntos = totalPuntos + bolsa.getSaldo();
+            }
+        }
+        if (totalPuntos >= puntajeAUtilizar){
+            return Boolean.TRUE;
+        }else{
+            return Boolean.FALSE;
+        }
+    }
+
+    private List<DetCanjePuntos> canjearPuntosDeBolsas(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar, List<DetCanjePuntos> detalles){
+        for (BolsaPuntos bolsa : bolsasCliente) {
             while (puntajeAUtilizar > 0) {
                 DetCanjePuntos detalleCanje = new DetCanjePuntos();
                 if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
@@ -71,16 +109,7 @@ public class CanjePuntosDAO {
             }
             bolsaPuntosDAO.actualizar(bolsa);
         }
-        this.em.persist(canje);
-        this.em.flush();
-        detCanjePuntosDAO.guardarDetalles(canje.getId(), detalles);
-
-        try {
-            mailSender.sendEmailConfirmacionCanje(clienteDAO.obtenerCliente(canje.getIdCliente()), canje.getPuntajeUtilizado(),
-                    conceptoCanjeDAO.obtenerConceptoCanje(canje.getId()).getDescConcepto(), canje.getFechaUso());
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+        return detalles;
     }
 
     public List<CanjePuntos> obtenerCanjesPorConceptoUso(Integer idConcepto){

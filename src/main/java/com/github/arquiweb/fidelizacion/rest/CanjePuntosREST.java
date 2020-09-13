@@ -24,8 +24,8 @@ public class CanjePuntosREST {
 
     @POST
     @Path("/canjear")
-    public Response canjearPuntos(CanjePuntos canjePuntos){
-        this.canjePuntosDAO.agregarCanjePuntos(canjePuntos);
+    public Response canjearPuntos(Integer idCliente, Integer idConceptoCanje) throws Exception {
+        this.canjePuntosDAO.agregarCanjePuntos(idCliente, idConceptoCanje);
         return Response.ok().build();
     }
     @GET

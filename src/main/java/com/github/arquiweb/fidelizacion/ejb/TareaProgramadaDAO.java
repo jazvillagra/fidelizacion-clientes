@@ -1,14 +1,32 @@
 package com.github.arquiweb.fidelizacion.ejb;
 
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
+
+import com.github.arquiweb.fidelizacion.model.BolsaPuntos;
 
 @Singleton
 public class TareaProgramadaDAO {
 
-    @Schedule(minute = "*/60", hour = "*", persistent = false)
+	@Inject
+	private BolsaPuntosDAO bolsaPuntosDAO;
+	
+    @Schedule(minute = "*", hour = "*/24", persistent = false)
     public void atSchedule() throws InterruptedException {
-        System.out.println("DeclarativeScheduler:: In atSchedule()");
+    	List<BolsaPuntos> bolsaPuntos = bolsaPuntosDAO.listar();
+    	if(bolsaPuntos != null && !bolsaPuntos.isEmpty()) {
+    		List<BolsaPuntos> bolsasVencidas = bolsaPuntos.stream().filter(
+    				bolsa -> bolsa.getFechaVencimiento().before(new Date())).collect(Collectors.toList());
+    		for(BolsaPuntos bolsa : bolsasVencidas) {
+    			bolsa.setSaldo(0);
+    			bolsaPuntosDAO.actualizar(bolsa);
+    		}
+    	}
     }
 
 }

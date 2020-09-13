@@ -99,39 +99,25 @@ public class CanjePuntosDAO {
     private List<DetCanjePuntos> canjearPuntosDeBolsas(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar, List<DetCanjePuntos> detalles){
         for (int i = bolsasCliente.size() - 1 ; i >= 0 ; i--) {
             BolsaPuntos bolsa = bolsasCliente.get(i);
-            System.out.println("Bolsa de cliente: "+ bolsa.getId());
-            while (puntajeAUtilizar > 0) {
-                DetCanjePuntos detalleCanje = new DetCanjePuntos();
-                if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
-                    System.out.println("- Bolsa no esta vencida");
-                    if (bolsa.getSaldo() <= puntajeAUtilizar) {
-                        System.out.println("-- El puntaje de la bolsa se puede restar");
-                        puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
-                        System.out.println("--2El puntaje de la bolsa se puede restar");
-                        detalleCanje.setIdBolsaPuntos(bolsa.getId());
-                        System.out.println("--3El puntaje de la bolsa se puede restar");
-                        bolsasCliente.get(i).setSaldo(0);
-                        System.out.println("--4El puntaje de la bolsa se puede restar");
-                        bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
-                        System.out.println("--5El puntaje de la bolsa se puede restar");
-                    }
-                    if (bolsa.getSaldo() > puntajeAUtilizar) {
-                        System.out.println("-- La bolsa tendra saldo restante para otros canjes");
-                        int saldoBolsa = bolsa.getSaldo() - puntajeAUtilizar;
-                        bolsasCliente.get(i).setSaldo(saldoBolsa);
-                        bolsasCliente.get(i).setPuntajeUtilizado(puntajeAUtilizar);
-                        puntajeAUtilizar = 0;
-                    }
+            DetCanjePuntos detalleCanje = new DetCanjePuntos();
+            if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
+                if (bolsa.getSaldo() <= puntajeAUtilizar) {
+                    puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
+                    detalleCanje.setIdBolsaPuntos(bolsa.getId());
+                    bolsasCliente.get(i).setSaldo(0);
+                    bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
                 }
-                System.out.println("-- Añadiendo detalle a lista");
+                if (bolsa.getSaldo() > puntajeAUtilizar) {
+                    int saldoBolsa = bolsa.getSaldo() - puntajeAUtilizar;
+                    bolsasCliente.get(i).setSaldo(saldoBolsa);
+                    bolsasCliente.get(i).setPuntajeUtilizado(puntajeAUtilizar);
+                    puntajeAUtilizar = 0;
+                }
+
                 detalles.add(detalleCanje);
-                System.out.println("-- DETALLE GUARDADO");
             }
-            System.out.println("--- Actualizar bolsa en tabla bolsa_puntos");
             bolsaPuntosDAO.actualizar(bolsasCliente.get(i));
-            System.out.println("---- Bolsa actualizada");
         }
-        System.out.println("Retornando bolsas");
         return detalles;
     }
 

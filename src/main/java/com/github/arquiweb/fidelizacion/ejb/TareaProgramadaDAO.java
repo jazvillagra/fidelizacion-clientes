@@ -19,6 +19,7 @@ public class TareaProgramadaDAO {
     @Schedule(minute = "*", hour = "*/24", persistent = false)
     public void atSchedule() throws InterruptedException {
     	List<BolsaPuntos> bolsaPuntos = bolsaPuntosDAO.listar();
+    	System.out.print("Actualizacion programada de bolsa puntos");
     	if(bolsaPuntos != null && !bolsaPuntos.isEmpty()) {
     		List<BolsaPuntos> bolsasVencidas = bolsaPuntos.stream().filter(
     				bolsa -> bolsa.getFechaVencimiento().before(new Date())).collect(Collectors.toList());

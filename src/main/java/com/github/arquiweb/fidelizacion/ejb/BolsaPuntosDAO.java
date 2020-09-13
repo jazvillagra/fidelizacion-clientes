@@ -2,7 +2,10 @@ package com.github.arquiweb.fidelizacion.ejb;
 
 import com.github.arquiweb.fidelizacion.model.BolsaPuntos;
 
+import java.util.Date;
+
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -13,9 +16,28 @@ import java.util.List;
 public class BolsaPuntosDAO {
 
     @PersistenceContext(unitName = "fidelizacionPU")
-
     private EntityManager em;
+    @Inject
+    private ReglaDAO reglaDAO;
+    @Inject
+    private VencimientoPuntosDAO vencimientoPuntosDAO;
 
+    public void calcBolsaPuntos(Integer idCliente, Integer monto) throws Exception {
+    	try {
+			Integer puntos = reglaDAO.obtenerEquivalenciaPuntos(monto);
+			BolsaPuntos bolsa = new BolsaPuntos();
+			bolsa.setIdCliente(idCliente);
+			bolsa.setMonto(monto);
+			bolsa.setPuntajeAsignado(puntos);
+			bolsa.setSaldo(puntos);
+			bolsa.setFechaAsignacion(new Date());
+			bolsa.setFechaVencimiento(vencimientoPuntosDAO.calculaFechaVencimiento(new Date()));
+			agregar(bolsa);
+		} catch (Exception e) {
+			throw e;
+		}
+    }
+    
     public void agregar(BolsaPuntos entidad) {
         this.em.persist(entidad);
     }

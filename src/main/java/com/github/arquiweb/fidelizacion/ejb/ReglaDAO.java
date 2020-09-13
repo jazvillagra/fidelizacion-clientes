@@ -1,20 +1,25 @@
 package com.github.arquiweb.fidelizacion.ejb;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.github.arquiweb.fidelizacion.model.Regla;
+import com.github.arquiweb.fidelizacion.model.VencimientoPuntos;
 
 @Stateless
 public class ReglaDAO {
 	
 	@PersistenceContext(unitName = "fidelizacionPU")
     private EntityManager em;
-
+    @Inject
+    private VencimientoPuntosDAO vencimientoPuntosDAO;
+    
     public Object obtener() {
         Query q = this.em.createQuery("select p from Regla p");
         List<Regla> reglas = (List<Regla>) q.getResultList();    	
@@ -45,12 +50,19 @@ public class ReglaDAO {
     public Integer obtenerEquivalenciaPuntos(Integer montoTotal) throws Exception {
     	Query q = this.em.createQuery("select p from Regla p");
     	List<Regla> reglas = (List<Regla>) q.getResultList();
+    	Date today = new Date();
 		for(Regla regla : reglas) {
 	    	if(regla.getLimiteMax() == null && regla.getLimiteMin() == null) {
-	    		return montoTotal/regla.getMontoEquivalencia();
+	    		VencimientoPuntos vencimiento = vencimientoPuntosDAO.obtenerVencimiento(regla.getIdVencimiento());
+	    		if(vencimiento.getFechaIniValidez().before(today) && vencimiento.getFechaFinValidez().after(today)) {
+		    		return montoTotal/regla.getMontoEquivalencia();	    			
+	    		}
 	    	}
 	    	else if(montoTotal <= regla.getLimiteMax() && montoTotal >= regla.getLimiteMin()) {
-				return montoTotal/regla.getMontoEquivalencia();
+	    		VencimientoPuntos vencimiento = vencimientoPuntosDAO.obtenerVencimiento(regla.getIdVencimiento());	    		
+	    		if(vencimiento.getFechaIniValidez().before(today) && vencimiento.getFechaFinValidez().after(today)) {
+					return montoTotal/regla.getMontoEquivalencia();	    			
+	    		}	    		
 			}
 		}
 		throw new Exception("Regla inexistente");

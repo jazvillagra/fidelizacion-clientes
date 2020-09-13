@@ -25,6 +25,10 @@ public class Regla {
     @Basic(optional = false)
     private Integer montoEquivalencia;
 
+    @Column(name = "id_vencimiento")
+    @Basic(optional = false)
+    private Integer idVencimiento;    
+    
     public int getId() {
         return id;
     }
@@ -56,4 +60,12 @@ public class Regla {
     public void setMontoEquivalencia(Integer montoEquivalencia) {
         this.montoEquivalencia = montoEquivalencia;
     }
+
+	public Integer getIdVencimiento() {
+		return idVencimiento;
+	}
+
+	public void setIdVencimiento(Integer idVencimiento) {
+		this.idVencimiento = idVencimiento;
+	}
 }

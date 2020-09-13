@@ -1,12 +1,10 @@
 package com.github.arquiweb.fidelizacion.rest;
 
 import com.github.arquiweb.fidelizacion.ejb.BolsaPuntosDAO;
-import com.github.arquiweb.fidelizacion.model.BolsaPuntos;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("bolsa-puntos")
 @Consumes("application/json")
@@ -16,6 +14,14 @@ public class BolsaPuntosREST {
     @Inject
     private BolsaPuntosDAO bolsaPuntosDAO;
 
+    @POST
+    @Path("/")
+    public Response agregarPuntos(@QueryParam("idCliente") Integer idCliente, 
+    		@QueryParam("monto") Integer monto) throws Exception {
+    	this.bolsaPuntosDAO.calcBolsaPuntos(idCliente, monto);
+    	return Response.ok().build();
+    }
+     
     @GET
     @Path("/")
     public Response listar( @QueryParam("idCliente") Integer idCliente,

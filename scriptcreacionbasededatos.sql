@@ -27,6 +27,7 @@ CREATE TABLE public.regla
     id integer NOT NULL,
     limite_max integer,
     limite_min integer,
+    id_vencimiento integer,
     monto_equivalencia integer NOT NULL,
     CONSTRAINT regla_pkey PRIMARY KEY (id)
 );
@@ -40,6 +41,10 @@ CREATE TABLE public.vencimiento_puntos
     duracion integer NOT NULL,
     CONSTRAINT vencimiento_puntos_pkey PRIMARY KEY (id)
 );
+alter table regla
+	add constraint fk_id_vencimiento
+		foreign key (id_vencimiento) references vencimiento_puntos
+			on delete cascade;
 CREATE SEQUENCE public.vencimiento_puntos_sec;
 
 CREATE TABLE public.bolsa_puntos
@@ -47,11 +52,11 @@ CREATE TABLE public.bolsa_puntos
     id integer NOT NULL,
     id_cliente integer NOT NULL,
     fecha_asignacion date NOT NULL,
-    fecha_vencimiento date NOT NULL,
+    fecha_vencimiento date,
     puntaje_asignado integer not null,
-    puntaje_utilizado integer not null,
-    saldo integer not null,
-    monto integer not null,
+    puntaje_utilizado integer,
+    saldo integer,
+    monto integer,
     CONSTRAINT bolsa_puntos_pkey PRIMARY KEY (id)
 );
 alter table bolsa_puntos

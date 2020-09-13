@@ -24,4 +24,18 @@ public class BolsaPuntosREST {
     	return Response.ok().build();
     }
      
+    @GET
+    @Path("/")
+    public Response listar( @QueryParam("idCliente") Integer idCliente,
+                            @QueryParam("rangoInicio") Integer rangoInicio,
+                            @QueryParam("rangoFin") Integer rangoFin ) throws Exception {
+        if (idCliente != null) {
+            return Response.ok(bolsaPuntosDAO.obtenerPorIdCliente(idCliente)).build();
+        }else if (rangoFin != null && rangoInicio != null){
+            return  Response.ok(bolsaPuntosDAO.obtenerPorRangoPuntos(rangoInicio, rangoFin)).build();
+        } else {
+            return  Response.ok("Envie algun parametro(idCliente,rangoInicio and rangoFin)").build();
+        }
+    }
+
 }

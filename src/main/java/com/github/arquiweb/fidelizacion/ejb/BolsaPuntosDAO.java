@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class BolsaPuntosDAO {
@@ -41,10 +43,28 @@ public class BolsaPuntosDAO {
         return this.em.find(BolsaPuntos.class, id);
     }
 
-    public BolsaPuntos obtenerPorIdCliente(Integer idCliente){
-        Query q = this.em.createQuery("select b from BolsaPuntos b where b.idCliente = :param");
-        q.setParameter("param", "%"+idCliente+"%");
-        return (BolsaPuntos) q.getResultList();
+    public List<BolsaPuntos> obtenerPorIdCliente(Integer idCliente){
+        List<BolsaPuntos> bolsaPuntos = null;
+        Query q = null;
+        q = this.em.createQuery("select b from BolsaPuntos b where b.idCliente = :param");
+        q.setParameter("param", idCliente);
+
+        bolsaPuntos = (List<BolsaPuntos>) q.getResultList();
+
+        return bolsaPuntos;
+    }
+
+    public List<BolsaPuntos> obtenerPorRangoPuntos(Integer rangoInicio, Integer rangoFin){
+        Query q = this.em.createQuery("select p from BolsaPuntos p");
+        List<BolsaPuntos> bolsasPuntos = (List<BolsaPuntos>) q.getResultList();
+        List<BolsaPuntos> result = new ArrayList<>();
+        for (BolsaPuntos bolsaPuntos : bolsasPuntos) {
+            if(bolsaPuntos.getPuntajeAsignado() >= rangoInicio && bolsaPuntos.getPuntajeAsignado() <= rangoFin){
+                result.add(bolsaPuntos);
+            }
+        }
+
+        return result;
     }
 
     public void eliminar(Integer id) {

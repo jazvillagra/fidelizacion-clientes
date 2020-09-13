@@ -99,24 +99,32 @@ public class CanjePuntosDAO {
     private List<DetCanjePuntos> canjearPuntosDeBolsas(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar, List<DetCanjePuntos> detalles){
         for (int i = bolsasCliente.size() - 1 ; i >= 0 ; i--) {
             BolsaPuntos bolsa = bolsasCliente.get(i);
+            System.out.println("Bolsa de cliente: "+ bolsa.getId());
             while (puntajeAUtilizar > 0) {
                 DetCanjePuntos detalleCanje = new DetCanjePuntos();
                 if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
+                    System.out.println("- Bolsa no esta vencida");
                     if (bolsa.getSaldo() <= puntajeAUtilizar) {
+                        System.out.println("-- El puntaje de la bolsa se puede restar");
                         puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
-                        detalleCanje.setPuntajeUtilizado(bolsa.getSaldo());
                         detalleCanje.setIdBolsaPuntos(bolsa.getId());
-                        bolsa.setSaldo(0);
+                        bolsasCliente.get(i).setSaldo(0);
+                        bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
                     } else if (bolsa.getSaldo() > puntajeAUtilizar) {
+                        System.out.println("-- La bolsa tendra saldo restante para otros canjes");
                         int saldoBolsa = bolsa.getSaldo() - puntajeAUtilizar;
-                        bolsa.setSaldo(saldoBolsa);
+                        bolsasCliente.get(i).setSaldo(saldoBolsa);
+                        bolsasCliente.get(i).setPuntajeUtilizado(puntajeAUtilizar);
                         puntajeAUtilizar = 0;
                     }
                 }
                 detalles.add(detalleCanje);
             }
+            System.out.println("--- Actualizar bolsa en tabla bolsa_puntos");
             bolsaPuntosDAO.actualizar(bolsa);
+            System.out.println("---- Bolsa actualizada");
         }
+        System.out.println("Retornando bolsas");
         return detalles;
     }
 

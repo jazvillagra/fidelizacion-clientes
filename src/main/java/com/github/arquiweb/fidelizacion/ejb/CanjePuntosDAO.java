@@ -107,10 +107,15 @@ public class CanjePuntosDAO {
                     if (bolsa.getSaldo() <= puntajeAUtilizar) {
                         System.out.println("-- El puntaje de la bolsa se puede restar");
                         puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
+                        System.out.println("--2El puntaje de la bolsa se puede restar");
                         detalleCanje.setIdBolsaPuntos(bolsa.getId());
+                        System.out.println("--3El puntaje de la bolsa se puede restar");
                         bolsasCliente.get(i).setSaldo(0);
+                        System.out.println("--4El puntaje de la bolsa se puede restar");
                         bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
-                    } else if (bolsa.getSaldo() > puntajeAUtilizar) {
+                        System.out.println("--5El puntaje de la bolsa se puede restar");
+                    }
+                    if (bolsa.getSaldo() > puntajeAUtilizar) {
                         System.out.println("-- La bolsa tendra saldo restante para otros canjes");
                         int saldoBolsa = bolsa.getSaldo() - puntajeAUtilizar;
                         bolsasCliente.get(i).setSaldo(saldoBolsa);
@@ -118,10 +123,12 @@ public class CanjePuntosDAO {
                         puntajeAUtilizar = 0;
                     }
                 }
+                System.out.println("-- Añadiendo detalle a lista");
                 detalles.add(detalleCanje);
+                System.out.println("-- DETALLE GUARDADO");
             }
             System.out.println("--- Actualizar bolsa en tabla bolsa_puntos");
-            bolsaPuntosDAO.actualizar(bolsa);
+            bolsaPuntosDAO.actualizar(bolsasCliente.get(i));
             System.out.println("---- Bolsa actualizada");
         }
         System.out.println("Retornando bolsas");

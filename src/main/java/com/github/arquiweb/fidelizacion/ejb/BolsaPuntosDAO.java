@@ -82,4 +82,5 @@ public class BolsaPuntosDAO {
     public void actualizar(BolsaPuntos entidad) {
         this.em.merge(entidad);
     }
+
 }

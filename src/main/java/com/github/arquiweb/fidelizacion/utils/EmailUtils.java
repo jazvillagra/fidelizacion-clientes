@@ -1,4 +1,4 @@
-package com.github.arquiweb.fidelizacion.mail;
+package com.github.arquiweb.fidelizacion.utils;
 
 import com.github.arquiweb.fidelizacion.model.Cliente;
 
@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.Properties;
 
-public class SimpleEmail {
+public class EmailUtils {
 
     public void sendEmailConfirmacionCanje(Cliente cliente, Integer puntosCanjeados,
                                            String concepto, Date fechaCanje) throws IOException {

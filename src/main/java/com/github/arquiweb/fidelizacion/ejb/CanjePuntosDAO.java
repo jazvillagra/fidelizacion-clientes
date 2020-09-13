@@ -103,18 +103,21 @@ public class CanjePuntosDAO {
             if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
                 if (bolsa.getSaldo() <= puntajeAUtilizar) {
                     puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
-                    detalleCanje.setIdBolsaPuntos(bolsa.getId());
                     bolsasCliente.get(i).setSaldo(0);
                     bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
+                    detalleCanje.setIdBolsaPuntos(bolsasCliente.get(i).getId());
+                    detalleCanje.setPuntajeUtilizado(bolsasCliente.get(i).getPuntajeUtilizado());
                 }
                 if (bolsa.getSaldo() > puntajeAUtilizar) {
-                    int saldoBolsa = bolsa.getSaldo() - puntajeAUtilizar;
-                    bolsasCliente.get(i).setSaldo(saldoBolsa);
+                    bolsasCliente.get(i).setSaldo(bolsa.getSaldo() - puntajeAUtilizar);
                     bolsasCliente.get(i).setPuntajeUtilizado(puntajeAUtilizar);
+                    detalleCanje.setIdBolsaPuntos(bolsa.getId());
+                    detalleCanje.setPuntajeUtilizado(bolsasCliente.get(i).getPuntajeUtilizado());
                     puntajeAUtilizar = 0;
                 }
-
-                detalles.add(detalleCanje);
+                if(detalleCanje.getPuntajeUtilizado()!= 0){
+                    detalles.add(detalleCanje);
+                }
             }
             bolsaPuntosDAO.actualizar(bolsasCliente.get(i));
         }

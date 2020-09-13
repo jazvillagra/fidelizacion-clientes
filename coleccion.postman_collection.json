@@ -540,6 +540,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "calcBolsaPuntos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/bolsa-puntos?idCliente=2&monto=250000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"bolsa-puntos"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "2"
+								},
+								{
+									"key": "monto",
+									"value": "250000"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

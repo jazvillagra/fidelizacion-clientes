@@ -19,6 +19,8 @@ public class BolsaPuntosDAO {
     private EntityManager em;
     @Inject
     private ReglaDAO reglaDAO;
+    @Inject
+    private VencimientoPuntosDAO vencimientoPuntosDAO;
 
     public void calcBolsaPuntos(Integer idCliente, Integer monto) throws Exception {
     	try {
@@ -28,7 +30,7 @@ public class BolsaPuntosDAO {
 			bolsa.setMonto(monto);
 			bolsa.setPuntajeAsignado(puntos);
 			bolsa.setFechaAsignacion(new Date());
-			bolsa.setFechaVencimiento(new Date());
+			bolsa.setFechaVencimiento(vencimientoPuntosDAO.calculaFechaVencimiento(new Date()));
 			agregar(bolsa);
 		} catch (Exception e) {
 			throw e;

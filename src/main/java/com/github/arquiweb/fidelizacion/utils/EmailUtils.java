@@ -2,10 +2,7 @@ package com.github.arquiweb.fidelizacion.utils;
 
 import com.github.arquiweb.fidelizacion.model.Cliente;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -20,28 +17,41 @@ public class EmailUtils {
                                            String concepto, Date fechaCanje) throws IOException {
 
         System.out.println("Construyendo mail de confirmación de canje");
+        // Add recipient
+        String to = cliente.getEmail();
+        // Add sender
+        String from = "arquiwebclass@gmail.com";
 
+        String host = "smtp.gmail.com";
 
-        // Carga propiedades para envio de emails
-        String resourceName = "../../resources/mail.properties"; // could also be a constant
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        Properties props = new Properties();
-        try(InputStream resourceStream = loader.getResourceAsStream(resourceName)) {
-            props.load(resourceStream);
-        }
-        // Iniciar sesión para envío de mail y construir mensaje
-        Session session = Session.getInstance(props, null);
-        MimeMessage message = new MimeMessage(session);
+        final Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", "arquiwebclass@gmail.com");
+        props.put("mail.smtp.password", "arquiweb");
+        props.put("mail.smtp.port", "587");
+
+        // Get the Session object
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(props.getProperty("mail.smtp.user"), props.getProperty("mail.smtp.password"));
+                    }
+                });
 
         try {
-            message.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
-            InternetAddress toAddress = new InternetAddress(cliente.getEmail());
-            message.addRecipient(Message.RecipientType.TO, toAddress);
+            // Create a default MimeMessage object
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
+            // Set Subject
             message.setSubject("Confirmación de canje de puntos");
             message.setText("Estimado Sr./Sra. " + cliente.getApellido() +"\n" +
                             "Se realizó el canje de " +puntosCanjeados + " puntos en concepto de " +
                             concepto + " en la fecha " + fechaCanje.toString()+ ".");
+
             Transport transport = session.getTransport("smtp");
             transport.connect(props.getProperty("mail.smtp.host"),
                                 props.getProperty("mail.smtp.user"),

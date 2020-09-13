@@ -1,8 +1,6 @@
 package com.github.arquiweb.fidelizacion.rest;
 
 import com.github.arquiweb.fidelizacion.ejb.BolsaPuntosDAO;
-import com.github.arquiweb.fidelizacion.ejb.ClienteDAO;
-import com.github.arquiweb.fidelizacion.model.Cliente;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

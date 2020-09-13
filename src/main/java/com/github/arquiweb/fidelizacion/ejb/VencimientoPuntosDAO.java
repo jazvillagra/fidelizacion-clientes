@@ -2,8 +2,6 @@ package com.github.arquiweb.fidelizacion.ejb;
 
 import com.github.arquiweb.fidelizacion.model.VencimientoPuntos;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

@@ -77,4 +77,11 @@ public class CanjePuntosDAO {
 
         return (List<CanjePuntos>)q.getResultList();
     }
+    public List<CanjePuntos> obtenerCanjesPorFechaCanje(String fechaCanje){
+
+        Query q = this.em.createQuery("select c from CanjePuntos c where to_char(c.fechaUso, 'YYYY-MM-dd') like :param");
+        q.setParameter("param", fechaCanje);
+
+        return (List<CanjePuntos>)q.getResultList();
+    }
 }

@@ -38,4 +38,10 @@ public class CanjePuntosREST {
     public Response listarPorCliente(@QueryParam("idCliente") Integer idCliente){
         return Response.ok(canjePuntosDAO.obtenerCanjesPorIdCliente(idCliente)).build();
     }
+
+    @GET
+    @Path("/listar/fecha-uso")
+    public Response listarPorFechaUso(@QueryParam("fechaCanje") String fechaCanje){
+        return Response.ok(canjePuntosDAO.obtenerCanjesPorFechaCanje(fechaCanje)).build();
+    }
 }

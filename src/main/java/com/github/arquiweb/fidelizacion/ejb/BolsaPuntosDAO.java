@@ -82,4 +82,15 @@ public class BolsaPuntosDAO {
     public void actualizar(BolsaPuntos entidad) {
         this.em.merge(entidad);
     }
+
+    public List<BolsaPuntos> obtenerPorIdClienteConFechasAscendentes(Integer idCliente){
+        List<BolsaPuntos> bolsaPuntos = null;
+        Query q = null;
+        q = this.em.createQuery("select b from BolsaPuntos b where b.idCliente = :param order by b.idCliente ASC ");
+        q.setParameter("param", idCliente);
+
+        bolsaPuntos = (List<BolsaPuntos>) q.getResultList();
+
+        return bolsaPuntos;
+    }
 }

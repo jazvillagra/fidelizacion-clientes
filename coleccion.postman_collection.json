@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "08fe0a98-b123-4562-8ffe-2de7ef4291a8",
-		"name": "Electiva3-Parcial1",
+		"_postman_id": "7c87f288-565b-41ce-8a61-daab832f6a70",
+		"name": "Electiva3-Parcial1(Heisecke-Villagra-Fare)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -67,7 +67,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "fd793ad3-eeb5-48f9-a699-91b06a890f47",
+								"id": "951f37f1-2b0d-4d30-a757-66fce31e632e",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -108,7 +108,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"apellido\": \"Lopez\",\r\n    \"nombre\": \"Paula\",\r\n    \"nroDocumento\": \"4374952\",\r\n    \"tipoDocumento\": \"CI\",\r\n    \"nacionalidad\": \"Paraguaya\",\r\n    \"email\": \"paula@gmail.com\",\r\n    \"telefono\": \"+595(983)4598486\",\r\n    \"fechaNacimiento\": {{$timestamp}}\r\n}",
+							"raw": "{\r\n    \"nombre\": \"matias\",\r\n    \"apellido\": \"fare\",\r\n    \"nroDocumento\": \"5719494\",\r\n    \"tipoDocumento\": \"CI\",\r\n    \"nacionalidad\": \"PY\",\r\n    \"email\": \"matiasfare59@gmail.com\",\r\n    \"telefono\": \"00000\",\r\n    \"fechaNacimiento\": 854334000000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,7 +183,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "d95db3ea-6f63-4da8-845a-67c6568aad2b",
+								"id": "be8fd53c-773f-4970-90c2-e8e474b167da",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -297,7 +297,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "192e99a1-4e9d-49d0-b80a-6b172c4317d2",
+								"id": "9aa61a0f-c55d-48a4-b190-56dc9eb5951f",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -366,7 +366,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "9a7a83f1-c097-4ace-92be-990e45e6ef18",
+								"id": "1a8504f7-55cf-45bb-a395-cfb3957058bb",
 								"exec": [
 									"const dateNow = new Date();"
 								],
@@ -518,7 +518,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/fidelizacion/bolsa-puntos?rangoInicio=50&rangoFin=150",
+							"raw": "localhost:8080/fidelizacion/bolsa-puntos?idCliente=2",
 							"host": [
 								"localhost"
 							],
@@ -530,11 +530,17 @@
 							"query": [
 								{
 									"key": "rangoInicio",
-									"value": "50"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "rangoFin",
-									"value": "150"
+									"value": "150",
+									"disabled": true
+								},
+								{
+									"key": "idCliente",
+									"value": "2"
 								}
 							]
 						}
@@ -572,13 +578,155 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CanjePuntos",
+			"item": [
+				{
+					"name": "canje-puntos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/canje-puntos?idCliente=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"canje-puntos"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET concepto canje-puntos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/canje-puntos/listar/concepto?idConcepto=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"canje-puntos",
+								"listar",
+								"concepto"
+							],
+							"query": [
+								{
+									"key": "idConcepto",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Canjes de Cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/canje-puntos/listar/cliente?idCliente=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"canje-puntos",
+								"listar",
+								"cliente"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get canjes por fecha YYYY-MM-dd",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/canje-puntos/listar/fecha-uso?fechaCanje=2020-09-13",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"canje-puntos",
+								"listar",
+								"fecha-uso"
+							],
+							"query": [
+								{
+									"key": "fechaCanje",
+									"value": "2020-09-13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "canjear-puntos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/fidelizacion/canje-puntos/canjear?idConceptoCanje=3&idCliente=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fidelizacion",
+								"canje-puntos",
+								"canjear"
+							],
+							"query": [
+								{
+									"key": "idConceptoCanje",
+									"value": "3"
+								},
+								{
+									"key": "idCliente",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "b2c334b5-8aeb-4196-8ba5-28cd5989af4b",
+				"id": "5fcb40e4-d7a2-484d-949b-b54764e02505",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -588,7 +736,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "71b31e4c-52c8-4be4-8071-5c9e20a99447",
+				"id": "c789ebaa-cf76-461f-86f0-001fe1c567f7",
 				"type": "text/javascript",
 				"exec": [
 					""

@@ -1,7 +1,7 @@
 package com.github.arquiweb.fidelizacion.ejb;
 
-import com.github.arquiweb.fidelizacion.utils.EmailUtils;
 import com.github.arquiweb.fidelizacion.model.*;
+import com.github.arquiweb.fidelizacion.utils.EmailUtils;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -9,7 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Stateless
 public class CanjePuntosDAO {
@@ -98,20 +100,20 @@ public class CanjePuntosDAO {
 
     private List<DetCanjePuntos> canjearPuntosDeBolsas(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar, List<DetCanjePuntos> detalles){
         for (int i = bolsasCliente.size() - 1 ; i >= 0 ; i--) {
-            BolsaPuntos bolsa = bolsasCliente.get(i);
             DetCanjePuntos detalleCanje = new DetCanjePuntos();
-            if (bolsa.getFechaVencimiento().after(new Date()) && bolsa.getSaldo() > 0) {
-                if (bolsa.getSaldo() <= puntajeAUtilizar) {
-                    puntajeAUtilizar = puntajeAUtilizar - bolsa.getSaldo();
+            if (bolsasCliente.get(i).getFechaVencimiento().after(new Date())
+                    && bolsasCliente.get(i).getSaldo() > 0) {
+                if (bolsasCliente.get(i).getSaldo() <= puntajeAUtilizar) {
+                    puntajeAUtilizar = puntajeAUtilizar - bolsasCliente.get(i).getSaldo();
+                    bolsasCliente.get(i).setPuntajeUtilizado(bolsasCliente.get(i).getSaldo());
                     bolsasCliente.get(i).setSaldo(0);
-                    bolsasCliente.get(i).setPuntajeUtilizado(bolsa.getSaldo());
                     detalleCanje.setIdBolsaPuntos(bolsasCliente.get(i).getId());
                     detalleCanje.setPuntajeUtilizado(bolsasCliente.get(i).getPuntajeUtilizado());
                 }
-                if (bolsa.getSaldo() > puntajeAUtilizar) {
-                    bolsasCliente.get(i).setSaldo(bolsa.getSaldo() - puntajeAUtilizar);
+                if (bolsasCliente.get(i).getSaldo() > puntajeAUtilizar && puntajeAUtilizar > 0) {
                     bolsasCliente.get(i).setPuntajeUtilizado(puntajeAUtilizar);
-                    detalleCanje.setIdBolsaPuntos(bolsa.getId());
+                    bolsasCliente.get(i).setSaldo(bolsasCliente.get(i).getSaldo() - puntajeAUtilizar);
+                    detalleCanje.setIdBolsaPuntos(bolsasCliente.get(i).getId());
                     detalleCanje.setPuntajeUtilizado(bolsasCliente.get(i).getPuntajeUtilizado());
                     puntajeAUtilizar = 0;
                 }

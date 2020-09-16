@@ -105,7 +105,7 @@ public class CanjePuntosDAO {
     }
 
     private List<DetCanjePuntos> canjearPuntosDeBolsas(List<BolsaPuntos> bolsasCliente, Integer puntajeAUtilizar, List<DetCanjePuntos> detalles){
-        for (int i = 0 ; i <= bolsasCliente.size() ; i++) {
+        for (int i = 0 ; i < bolsasCliente.size() ; i++) {
             DetCanjePuntos detalleCanje = new DetCanjePuntos();
             if (bolsasCliente.get(i).getFechaVencimiento().after(new Date())
                     && bolsasCliente.get(i).getSaldo() > 0) {
